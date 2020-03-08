@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d4bf9ac7f4a933030e46a346ee2917",
+    "content-hash": "8e5d35defdd74f8c6ddaa3f8f36ee05c",
     "packages": [
+        {
+            "name": "alexanderpoellmann/cryptofont",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlexanderPoellmann/CryptoFont.git",
+                "reference": "b45dcadc2bd612c14f6b3963a9c2284b5c9918df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlexanderPoellmann/CryptoFont/zipball/b45dcadc2bd612c14f6b3963a9c2284b5c9918df",
+                "reference": "b45dcadc2bd612c14f6b3963a9c2284b5c9918df",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OFL-1.1",
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Manfred Poellmann",
+                    "homepage": "http://twitter.com/AMPoellmann",
+                    "role": "developer"
+                }
+            ],
+            "description": "CryptoFont - A sleek webfont for your favourite cryptocurrencies",
+            "homepage": "https://alexanderpoellmann.com/cryptofont",
+            "keywords": [
+                "crypto",
+                "cryptocoin",
+                "cryptocurrency",
+                "font",
+                "icon",
+                "webfont"
+            ],
+            "time": "2017-07-01T14:59:46+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "v0.1.1",

@@ -17,6 +17,18 @@
 Route::get('/', function () {
     return view('page.home');
 });
+Route::get('/about', function () {
+    return view('page.about');
+});
+Route::get('/news', function () {
+    return view('page.bbnews');
+});
+Route::get('/crypto', function () {
+    return view('page.crypto');
+});
+Route::get('/contact', function () {
+    return view('page.contact');
+});
 
 Auth::routes();
 

@@ -78,7 +78,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <p class="copyright">&copy; 2015 Your company name</p>
+                <p class="copyright">&copy; 2020 Crypto Market Today</p>
             </div>
             <div class="col-md-6 col-sm-6">
                 <p class="footer-menu">
