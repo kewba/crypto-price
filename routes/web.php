@@ -1,5 +1,7 @@
 <?php
+use App\bbiNewsItemsModel;
 
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,21 +16,11 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('page.home');
-});
-Route::get('/about', function () {
-    return view('page.about');
-});
-Route::get('/news', function () {
-    return view('page.bbnews');
-});
-Route::get('/crypto', function () {
-    return view('page.crypto');
-});
-Route::get('/contact', function () {
-    return view('page.contact');
-});
+Route::get('/','PageController@index')->name('index');
+Route::get('/about','PageController@about')->name('about');
+Route::get('/news','PageController@news')->name('news');
+Route::get('/crypto','PageController@crypto')->name('crypto');
+Route::get('/contact','PageController@contact')->name('contact');
 
 Auth::routes();
 

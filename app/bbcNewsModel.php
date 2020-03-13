@@ -22,4 +22,14 @@ class bbcNewsModel extends Model
 
     const CREATED_AT = 'bbc_timestamp';
     const UPDATED_AT = 'bbc_last_mod';
+
+    public static function channelLogos (){
+        $imgArr = [];
+        $imgArr['CoinDesk']   = 'img/new_channel/coindesk.png';
+        $imgArr['SludgeFeed'] = 'img/new_channel/sludge.jpg';
+        $imgArr['NewsBTC']    = 'img/new_channel/NewsBTC.png';
+        $imgArr['CCN']        = 'img/new_channel/ccn.png';
+        $imgArr['TechCrunch'] = 'img/new_channel/techcruch.png';
+        return $imgArr;
+    }
 }

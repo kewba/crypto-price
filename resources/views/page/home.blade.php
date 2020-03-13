@@ -10,7 +10,7 @@
       <div class="intro-img">
         <img src="img/intro-img.svg" alt="" class="img-fluid">
       </div>
-
+   
       <div class="intro-info">
         <h2>We provide CryptoCurrency<br><span>Market Data</span><br>for better decisions.</h2>
         <div>
@@ -81,6 +81,7 @@
               <div class="card-body">
                 <h5 class="card-title">Bitcoin</h5>
                 <p class="card-text">Bitcoin is a cryptocurrency. It is a decentralized digital currency without a central bank or single administrator.</p>
+                <h3>{{$crypto_prices['BTC']}}</h3>
                 <a href="/crypto" class="readmore">Read more </a>
               </div>
             </div>
@@ -92,6 +93,7 @@
               <div class="card-body">
                 <h5 class="card-title">Ethereum</h5>
                 <p class="card-text">Ethereum is an open source, public, blockchain-based distributed computing platform and operating system .</p>
+                <h3>{{$crypto_prices['ETH']}}</h3>
                 <a href="/crypto" class="readmore">Read more </a>
               </div>
             </div>
@@ -103,6 +105,7 @@
               <div class="card-body">
                 <h5 class="card-title">Litecoin</h5>
                 <p class="card-text">Litecoin is a peer-to-peer cryptocurrency and open-source software project released under the MIT/X11 license..</p>
+                <h3>{{$crypto_prices['LTC']}}</h3>
                 <a href="/crypto" class="readmore">Read more </a>
               </div>
             </div>
@@ -114,6 +117,7 @@
               <div class="card-body">
                 <h5 class="card-title">Dash</h5>
                 <p class="card-text">Dash is an open source cryptocurrency. It is an altcoin that was forked from the Bitcoin protocol.  </p>
+                <h3>{{$crypto_prices['DASH']}}</h3>
                 <a href="/crypto" class="readmore">Read more </a>
               </div>
             </div>
@@ -137,127 +141,40 @@
 
 <section id="blog-standard" class="section blog blog-card-fullwidth mild-bg">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_1.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                Design Trends That We Will See Taking Over Web Design
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">Article</a></span>
-            <span>01 Nov</span>
-        </div>
-    </div>
-</div>
+    <header class="section-header pt-4">
+          <h3>Bulletin News</h3>
+        </header>
+        <div class="row ">
+        <?php foreach($newsItems as $item) :?>
+         
+          
+          
+          <div class="col-md-4 col-sm-4 pt-1 pb-1">
+                <div class="blog-post ">
+                    <img class="img-fluid center-block" src="<?= $item['img_url'];?>" alt="<?= $item['title']; ?>">
+                    <div class="blog-content">
+                        <h5>
+                            <a href="blog__single__right_sidebar.html">
+                            <?= $item['title']; ?>
+                            </a>
+                        </h5>
+                        <div class="post-meta ">
+                            <span class="blog-catagory">Published</span>
+                            <span><?= $item['date']; ?></span>
+                        </div>
+                        <a href="/news" class="btn btn-primary btn-lg btn-block ">Read...</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_2.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                Web Development Reading List #112: Updated Edge
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">Performance</a></span>
-            <span>22 Jan</span>
-        </div>
-    </div>
-</div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_3.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                Static Website Generators Reviewed: Jekyll, Middleman
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">Web Development</a></span>
-            <span>01 Feb</span>
-        </div>
-    </div>
-</div>
-            </div>
+        <?php endforeach;?>
+            
+            
+            
         </div>
 
-        <div class="row">
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_5.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                Using System UI Fonts In Web Design: A Quick Practical Guide
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">Psychology</a></span>
-            <span>01 Apr</span>
-        </div>
-    </div>
-</div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_6.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                Freebie: Voyage Icon Set (40 Icons, AI, EPS, SVG, PNG)
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">User Experience</a></span>
-            <span>01 May</span>
-        </div>
-    </div>
-</div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-<div class="blog-post ">
-    <img class="img-responsive center-block" src="img/blog_7.jpg" alt="Latest News 1">
-    <div class="blog-content">
-        <h5>
-            <a href="blog__single__right_sidebar.html">
-                The State Of Airline Websites 2015: Lessons Learned
-            </a>
-        </h5>
-        <div class="post-meta">
-            <span class="blog-catagory"><a href="#">Flexbox</a></span>
-            <span>16 June</span>
-        </div>
-    </div>
-</div>
-            </div>
-        </div>
+        
 
-        <nav class="blog-pagination">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+       
     </div>
 </section>
 	

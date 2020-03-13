@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\bbiNewsItemsModel;
 use Illuminate\Http\Request;
+use App\Http\Resources\bbc_news as NewResource;
 
 class BbiNewsItemsModelController extends Controller
 {
@@ -15,6 +16,18 @@ class BbiNewsItemsModelController extends Controller
     public function index()
     {
         //
+    }
+
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function itemsList()
+    {
+        $newsList = bbiNewsItemsModel::paginate(15);
+        return $newsList;
     }
 
     /**

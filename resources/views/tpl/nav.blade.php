@@ -7,7 +7,7 @@
       <div class="logo float-left">
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
-        <a href="/" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a>
+        <a href="/" class="scrollto"><img src="img/logos.png" alt="" class="img-fluid"></a>
       </div>
 
       <nav class="main-nav float-right d-none d-lg-block">
