@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('title')
+Crypto News
+@endsection
 @section('intro')
 <!--==========================
     Intro Section

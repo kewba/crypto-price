@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('title')
+Cryptocurrency
+@endsection
 @section('intro')
 <!--==========================
     Intro Section
@@ -54,7 +57,7 @@
                   <div class="container">
                           <div class="section-header">
                             <h4 class="text-center pt-3"><i class="fa fa-btc"></i> Bitcoin Currency Exchange Rates</h4>
-                            <p>Currency rates updated {{$ratesUpdate}}</p>
+                            <p>Currency exchange rates updated {{$ratesUpdate}}</p>
                           </div>
                           <div class="table-responsive">
                             <table class="table">
@@ -100,7 +103,7 @@
               <div class="container">
                       <div class="section-header">
                         <h4 class="text-center pt-3"><i class="cf cf-eth"></i> Ethereum Currency Exchange Rates</h4>
-                        <p>Currency rates updated {{$ratesUpdate}}</p>
+                        <p>Currency exchange rates updated {{$ratesUpdate}}</p>
                       </div>
                       <div class="table-responsive">
                         <table class="table">
@@ -145,7 +148,7 @@
               <div class="container">
                       <div class="section-header">
                         <h4 class="text-center pt-3"><i class="cf cf-ltc"></i> Litecoin Currency Exchange Rates</h4>
-                        <p>Currency rates updated {{$ratesUpdate}}</p>
+                        <p>Currency exchange rates updated {{$ratesUpdate}}</p>
                       </div>
                       <div class="table-responsive">
                         <table class="table">
@@ -190,7 +193,7 @@
               <div class="container">
                       <div class="section-header">
                         <h4 class="text-center pt-3"><i class="cf cf-dash"></i> DASH Currency Exchange Rates</h4>
-                        <p>Currency rates updated {{$ratesUpdate}}</p>
+                        <p>Currency exchange rates updated {{$ratesUpdate}}</p>
                       </div>
                       <div class="table-responsive">
                         <table class="table">

@@ -1,4 +1,17 @@
 @extends('master')
+@section('title')
+Contact Us
+@endsection
+
+
+@section('intro')
+<!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" class="clearfix">
+      <h1 class="text-center text-white">Contact Us</h1>
+</section>
+@endsection
 
 @section('content')
   <!--==========================
@@ -8,7 +21,6 @@
       <div class="container-fluid">
 
         <div class="section-header">
-          <h3>Contact Us</h3>
         </div>
 
         <div class="row wow fadeInUp">

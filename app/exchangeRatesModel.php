@@ -23,6 +23,7 @@ class exchangeRatesModel extends Model
     public static function latestXRates(){
         $xrates_data = self::select('currency_list', 'CREATED_AT' )
                ->take(1)
+               ->orderByRaw('CREATED_AT DESC')
                ->get();
 
         return $xrates_data;

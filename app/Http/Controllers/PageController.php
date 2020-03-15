@@ -24,16 +24,16 @@ class PageController extends Controller
         $btc_p = $eht_p = $ltc_p = $dash_p = '';
         foreach ($cryptoPrices as $v) {
            if ($v['cc_name'] == 'BTC') {
-                $btc_p = $v['cc_price'];
+                $btc_p = round($v['cc_price'],2);
            }
            if ($v['cc_name'] == 'ETH') {
-                $eht_p = $v['cc_price'];
+                $eht_p = round($v['cc_price'],2);
            }
            if ($v['cc_name'] == 'LTC') {
-                $ltc_p = $v['cc_price'];
+                $ltc_p = round($v['cc_price'],2);
            }
            if ($v['cc_name'] == 'DASH') {
-                $dash_p = $v['cc_price'];
+                $dash_p = round($v['cc_price'],2);
            }
         }
         $crypto_prices = [];

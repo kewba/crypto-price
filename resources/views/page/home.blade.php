@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('title')
+Home
+@endsection
 @section('intro')
 <!--==========================
     Intro Section
