@@ -34,4 +34,22 @@ class cryptoCcModel extends Model
 
         return $crypto_data;
     }
+
+    public static function getLate30($coin){
+        $crypto_data = self::select('cc_id','cc_name', 'cc_country', 'cc_volume', 'cc_price', 'cc_timestamp','cc_change','cc_status','cc_markets' )
+        ->where('cc_name', $coin)
+        ->take(30)
+        ->get();
+        
+        return $crypto_data;  
+    }
+
+    public static function cryptoNames()
+    {
+        $cryptArr['BTC'] = 'Bitcoin';
+        $cryptArr['LTC'] = 'Litecoin';
+        $cryptArr['ETH'] = 'Ethereum';
+        $cryptArr['DASH'] = 'Dash';
+        return $cryptArr;
+    }
 }

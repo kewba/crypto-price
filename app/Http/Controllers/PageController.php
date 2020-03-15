@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\bbiNewsItemsModel;
 use App\bbcNewsModel;
 use App\cryptoCcModel;
+use App\exchangeRatesModel;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -104,15 +105,125 @@ class PageController extends Controller
      */
     public function crypto()
     {
-        $btcLabel = "'BTC'";
-        //$btc_data = DB::select(DB::raw("SELECT * FROM  crypto_cc WHERE cc_name = ".$btcLabel." limit 350"));
-        //$btc_data = DB::table('crypto_cc')->where('cc_name', '=', $btcLabel)->get();
-        $btc_data = cryptoCcModel::where('cc_name', 'BTC')
-               ->orderBy('cc_timestamp', 'desc')
-               ->take(350)
-               ->get();
-        //dd($btc_data);
-        return view('page.crypto');
+    
+        //get currency exchange rates
+        $rates_data = exchangeRatesModel::latestXRates();
+        $xchRatesList = json_decode($rates_data[0]['currency_list']);
+        $xchRatesDate =Carbon::createFromTimestampUTC($rates_data[0]['CREATED_AT'])->diffForHumans();
+        
+        //get latest times and prices
+        $cryptNames = cryptoCcModel::cryptoNames();
+        $curr_price = array();
+        $ds = array();
+        $cnt_once = 0;
+        $colours=['red','green','blue','grey'];
+       foreach ($cryptNames as $k => $v) {
+              
+          $cc_times = array();
+          $cc_price = array();
+          $cc_hold = array();
+          $ds_hold = array();
+    
+          $coinDetObj = cryptoCcModel::getLate30($k);
+          foreach ($coinDetObj as $cd) {
+            $cc_times[] = date('H:i',$cd->cc_timestamp);
+            $cc_price[] = round($cd->cc_price,2);
+          }
+         
+          $cc_times = array_reverse($cc_times);
+          $cc_price = array_reverse($cc_price);
+          $ds_hold['data'] = $cc_price;
+          $ds_hold['label'] = $v;
+          $ds_hold['backgroundColor'] = $colours[$cnt_once];
+          $ds_hold['fill'] = false;
+          $cnt_once++;
+    
+          $cc_hold['id']        = $coinDetObj[0]->cc_id;
+          $cc_hold['name']      = $coinDetObj[0]->cc_name;
+          $cc_hold['price']     = $coinDetObj[0]->cc_price;
+          $cc_hold['country']   = $coinDetObj[0]->cc_country;
+          $cc_hold['volume']    = $coinDetObj[0]->cc_volume;
+          $cc_hold['timestamp'] = $coinDetObj[0]->cc_timestamp;
+          $cc_hold['change']    = $coinDetObj[0]->cc_change;
+          $cc_hold['time_list'] = $cc_times;
+          $cc_hold['price_list']= $cc_price;
+          $cc_hold['markets']   = json_decode($coinDetObj[0]->cc_markets);
+          
+          
+       
+            $dss[] = $ds_hold;
+            $ccc[] = $cc_hold;
+       }
+
+       $ds['labels'] = $cc_times;
+       $ds['datasets'] = $dss;
+       $ds['cc_meta'] = $ccc;
+       $ds['ctype'] = 'line';
+       $chz=json_encode($ds);
+
+
+       //Get crypto price
+       $cryptoPrices = cryptoCcModel::getCryptoPrices();
+       $btc_p = $eth_p = $ltc_p = $dash_p = '';
+       foreach ($cryptoPrices as $v) {
+          if ($v['cc_name'] == 'BTC') {
+               $btc_p = round($v['cc_price'], 2);
+          }
+          if ($v['cc_name'] == 'ETH') {
+               $eth_p = round($v['cc_price'], 2);
+          }
+          if ($v['cc_name'] == 'LTC') {
+               $ltc_p = round($v['cc_price'], 2);
+          }
+          if ($v['cc_name'] == 'DASH') {
+               $dash_p = round($v['cc_price'], 2);
+          }
+       }
+       $crypto_prices = [];
+        $crypto_prices ['BTC'] = $btc_p;
+        $crypto_prices ['ETH'] = $eth_p;
+        $crypto_prices ['LTC'] = $ltc_p;
+        $crypto_prices ['DASH'] = $dash_p;
+
+       //Loop currency rates for btc rates
+        //dd( $xchRatesList); 
+        $btcRatesArr = [];
+        $ltcRatesArr = [];
+        $ethRatesArr = [];
+        $dashRatesArr = [];
+        foreach ( $xchRatesList as $ch) {
+            //btc
+            $btcHoldArr['currency'] = $ch->currency;
+            $btcHoldArr['btc_val'] =  round(($ch->doll_val * $btc_p), 2);
+            $btcRatesArr[] =  $btcHoldArr;
+
+            //ltc
+            $ltcHoldArr['currency'] = $ch->currency;
+            $ltcHoldArr['ltc_val'] =  round(($ch->doll_val * $ltc_p), 2);
+            $ltcRatesArr[] =  $ltcHoldArr;
+
+            //eth
+            $ethHoldArr['currency'] = $ch->currency;
+            $ethHoldArr['eth_val'] =  round(($ch->doll_val * $eth_p), 2);
+            $ethRatesArr[] =  $ethHoldArr;
+
+            //eth
+            $dashHoldArr['currency'] = $ch->currency;
+            $dashHoldArr['dash_val'] =  round(($ch->doll_val * $dash_p), 2);
+            $dashRatesArr[] =  $dashHoldArr;
+
+        }
+        //dd( $ratesArr); 
+        return view('page.crypto',[
+            'ch_data' => $ds,
+            'chz'=>$chz,
+            'btcList'=>$btcRatesArr,
+            'ltcList'=>$ltcRatesArr,
+            'ethList'=>$ethRatesArr,
+            'dashList'=>$dashRatesArr,
+            'ratesUpdate'=>$xchRatesDate,
+            'crypts'=>$crypto_prices
+            ]);
     }
 
 
