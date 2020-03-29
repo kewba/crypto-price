@@ -28,7 +28,8 @@ class cryptoCcModel extends Model
     public $timestamps = false;
 
     public static function getCryptoPrices(){
-        $crypto_data = self::select('cc_name', 'cc_country', 'cc_volume', 'cc_price', 'cc_timestamp','cc_change','cc_status' )
+        $crypto_data = self::orderBy('cc_timestamp', 'desc')
+               ->select('cc_name', 'cc_country', 'cc_volume', 'cc_price', 'cc_timestamp','cc_change','cc_status' )
                ->take(4)
                ->get();
 
@@ -36,7 +37,8 @@ class cryptoCcModel extends Model
     }
 
     public static function getLate30($coin){
-        $crypto_data = self::select('cc_id','cc_name', 'cc_country', 'cc_volume', 'cc_price', 'cc_timestamp','cc_change','cc_status','cc_markets' )
+        $crypto_data = self::orderBy('cc_timestamp', 'desc')
+        ->select('cc_id','cc_name', 'cc_country', 'cc_volume', 'cc_price', 'cc_timestamp','cc_change','cc_status','cc_markets' )
         ->where('cc_name', $coin)
         ->take(30)
         ->get();

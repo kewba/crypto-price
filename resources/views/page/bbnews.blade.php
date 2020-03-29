@@ -2,6 +2,8 @@
 @section('title')
 Crypto News
 @endsection
+@section('og-title')Crypto News @stop
+@section('meta-description')Crytpo Markets Todays bulletin board of news from the cryto space.  @stop
 @section('intro')
 <!--==========================
     Intro Section
@@ -20,17 +22,17 @@ Crypto News
                 <div class="blog-post ">
                     <img class="img-fluid center-block" src="<?= $item['img_url'];?>" alt="<?= $item['title']; ?>">
                     <div class="blog-content">
-                        <h5>
-                            <a href="<?= $item['link']; ?>">
-                               <?= $item['title']; ?>
+                        <h5 class="pt-2 text-center">
+                            <a href="<?=$item['seo_url']; ?>">
+                               <?=$item['title']; ?>
                             </a>
                         </h5>
-                        <?= $item['desc']; ?>
-                        <div class="post-meta ">
+                        <p><?= $item['desc']; ?></p>
+                        <div class="post-meta pb-3">
                             <span class="blog-catagory">Published</span>
                             <span><?= $item['date']; ?></span>
                         </div>
-                        <a href="<?= $item['link']; ?>" class="btn btn-primary btn-lg btn-block ">View Article</a>
+                        <a href="<?= $item['seo_url']; ?>" class="btn btn-primary btn-lg btn-block ">View Article</a>
                     </div>
                 </div>
             </div>

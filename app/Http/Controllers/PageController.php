@@ -9,6 +9,7 @@ use App\exchangeRatesModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 class PageController extends Controller
 {
     /**
@@ -18,22 +19,27 @@ class PageController extends Controller
      */
     public function index()
     {
-        $newsList = bbiNewsItemsModel::paginate(6);
+        $newsList = bbiNewsItemsModel::orderBy('bbi_timestamp', 'desc')->paginate(6);
         $imgArr = bbcNewsModel::channelLogos();
         $cryptoPrices = cryptoCcModel::getCryptoPrices();
+        //get currency exchange rates
+        $rates_data = exchangeRatesModel::latestXRates();
+        $xchRatesList = json_decode($rates_data[0]['currency_list']);
+        $pndVal = $xchRatesList[51]->doll_val;
+        //dd($xchRatesList[51]->doll_val);
         $btc_p = $eht_p = $ltc_p = $dash_p = '';
         foreach ($cryptoPrices as $v) {
            if ($v['cc_name'] == 'BTC') {
-                $btc_p = round($v['cc_price'],2);
+                $btc_p = '£'.round(($v['cc_price'] * $pndVal ),2);
            }
            if ($v['cc_name'] == 'ETH') {
-                $eht_p = round($v['cc_price'],2);
+                $eht_p = '£'.round(($v['cc_price'] * $pndVal ),2);
            }
            if ($v['cc_name'] == 'LTC') {
-                $ltc_p = round($v['cc_price'],2);
+                $ltc_p = '£'.round(($v['cc_price'] * $pndVal ),2);
            }
            if ($v['cc_name'] == 'DASH') {
-                $dash_p = round($v['cc_price'],2);
+                $dash_p = '£'.round(($v['cc_price'] * $pndVal ),2);
            }
         }
         $crypto_prices = [];
@@ -50,6 +56,9 @@ class PageController extends Controller
             $hold = [];
             $img_name = $v['bbc_name'];
             $hold ['title']   = $v['bbi_title'];
+            $hold ['title']   =   str_replace("â€™", "&#39;",$hold['title']);
+            $hold ['title']   =   str_replace("â€˜", "-",$hold['title']);
+            $hold ['title']   =   str_replace("â€“", "-",$hold['title']);
             $hold ['date']   =  $hum_date;
             $hold ['img_url'] = $imgArr[$img_name];
             $newItmDispArr [] = $hold;
@@ -70,6 +79,37 @@ class PageController extends Controller
         return view('page.about');
     }
 
+    public function newsSingle($seo_url)
+    {
+        $newsItem ='';
+
+        $newsItem = bbiNewsItemsModel::where('bbi_seo_url',$seo_url)->first();
+        $imgArr = bbcNewsModel::channelLogos();
+        $url =request()->getSchemeAndHttpHost();
+        $img_name = $newsItem['bbc_name'];
+       
+        $relArts = bbiNewsItemsModel::relatedItems($newsItem['bbi_category']);
+        $relArtArr=[];
+        foreach ($relArts as $r) {
+            $relArtHld['rel_title'] = BbiNewsItemsModelController::remChars($r['bbi_title']);
+            $rImgNme = $r['bbc_name'];
+            $relArtHld['rel_img']   = $imgArr[$rImgNme];
+            $relArtHld['rel_link'] = $url.'/news'.'/'.$r['bbi_seo_url'];
+            $relArtArr[] =  $relArtHld;
+        }
+        //dd($relArts);
+        $itemArr=[];
+        $itemArr['pg_title'] = BbiNewsItemsModelController::remChars($newsItem['bbi_title']);
+        $itemArr['pg_desc']  = $newsItem['bbi_desc'];
+        $itemArr['pg_meta_title'] = Str::limit(BbiNewsItemsModelController::remChars($newsItem['bbi_title']) , 55);
+        $itemArr['pg_meta_desc'] = Str::limit($newsItem['bbi_desc'], 155);
+        $itemArr['pg_image'] = $imgArr[$img_name];
+        $itemArr['pg_link'] = $newsItem['bbi_link'];
+        $itemArr['pg_co_name'] = $newsItem['bbc_name'];
+        $itemArr['pg_posted'] = Carbon::createFromTimestampUTC($newsItem['bbi_timestamp'])->diffForHumans();
+        // dd($itemArr);Carbon::createFromTimestampUTC($newsItem['bbi_timestamp'])->diffForHumans();
+        return view('page.bbnews_single',['newsItem' => $itemArr,'relItems'=> $relArtArr]);
+    }
       /**
      * Display a listing of the resource.
      *
@@ -77,18 +117,23 @@ class PageController extends Controller
      */
     public function news()
     {
-        $newsList = bbiNewsItemsModel::paginate(25);
+        $newsList = bbiNewsItemsModel::orderBy('bbi_timestamp', 'desc')->paginate(25);
         $imgArr = bbcNewsModel::channelLogos();
         //dd($newsList);
         foreach ($newsList as $v) {
             $time_stamp = $v['bbi_timestamp'];
-              
+             
              $hum_date =Carbon::createFromTimestampUTC($time_stamp)->diffForHumans();
+             $url =request()->getSchemeAndHttpHost();
               $hold = [];
               $img_name = $v['bbc_name'];
-              $hold ['title']   = $v['bbi_title'];
-              $hold ['desc']    = $v['bbi_desc'];
+              $hold ['title']   =   str_replace("â€™", "&#39;",$v['bbi_title']);
+              $hold ['title']   =   str_replace("â€˜", "-",$hold['title']);
+              $hold ['title']   =   str_replace("â€“", "-",$hold['title']);
+              //$hold ['title']   =  html_entity_decode($v['bbi_title']);
+              $hold ['desc']    = Str::limit($v['bbi_desc'], 100);
               $hold ['link']    = $v['bbi_link'];
+              $hold ['seo_url']    = $url.'/news'.'/'.$v['bbi_seo_url'];
               $hold ['date']    =  $hum_date;
               $hold ['img_url'] = $imgArr[$img_name];
               $newItmDispArr [] = $hold;
@@ -109,6 +154,7 @@ class PageController extends Controller
         //get currency exchange rates
         $rates_data = exchangeRatesModel::latestXRates();
         $xchRatesList = json_decode($rates_data[0]['currency_list']);
+        $pndVal = $xchRatesList[51]->doll_val;
         $xchRatesDate =Carbon::createFromTimestampUTC($rates_data[0]['CREATED_AT'])->diffForHumans();
         
         //get latest times and prices
@@ -213,6 +259,28 @@ class PageController extends Controller
             $dashRatesArr[] =  $dashHoldArr;
 
         }
+
+        foreach ($cryptoPrices as $v) {
+            if ($v['cc_name'] == 'BTC') {
+                 $btc_p = '£'.round(($v['cc_price'] * $pndVal ),2);
+            }
+            if ($v['cc_name'] == 'ETH') {
+                 $eht_p = '£'.round(($v['cc_price'] * $pndVal ),2);
+            }
+            if ($v['cc_name'] == 'LTC') {
+                 $ltc_p = '£'.round(($v['cc_price'] * $pndVal ),2);
+            }
+            if ($v['cc_name'] == 'DASH') {
+                 $dash_p = '£'.round(($v['cc_price'] * $pndVal ),2);
+            }
+         }
+         $crypto_prices = [];
+         $crypto_prices ['BTC'] = $btc_p;
+         $crypto_prices ['ETH'] = $eht_p;
+         $crypto_prices ['LTC'] = $ltc_p;
+         $crypto_prices ['DASH'] = $dash_p;
+
+         
         //dd( $ratesArr); 
         return view('page.crypto',[
             'ch_data' => $ds,

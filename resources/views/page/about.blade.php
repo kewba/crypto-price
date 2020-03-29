@@ -2,6 +2,8 @@
 @section('title')
 About Us
 @endsection
+@section('og-title')About Us @stop
+@section('meta-description')At CMT we believe blockchains and cryptos will have a firm place in our landscape of emerging technologies. @stop
 @section('intro')
 <!--==========================
     Intro Section
@@ -30,19 +32,19 @@ About Us
             </p>
 
             <div class="icon-box ">
-              <div class="icon"><i class="fa fa-chart"></i></div>
+              <div class="icon"></div>
               <h4 class="title"><a href="">Blockchain analysis</a></h4>
               <p class="description">The analysis of public blockchains has become increasingly important with the popularity of bitcoin, Ethereum, litecoin and other cryptocurrencies.</p>
             </div>
 
             <div class="icon-box " data-wow-delay="0.2s">
-              <div class="icon"><i class="fa fa-photo"></i></div>
+              <div class="icon"></div>
               <h4 class="title"><a href="">Decentralization</a></h4>
               <p class="description">Open blockchains are more user-friendly than some traditional ownership records.</p>
             </div>
 
             <div class="icon-box " data-wow-delay="0.4s">
-              <div class="icon"><i class="fa fa-bar-chart"></i></div>
+              <div class="icon"></div>
               <h4 class="title"><a href="">Permissionless</a></h4>
               <p class="description">The great advantage to an open, permissionless, or public, blockchain network is that guarding against bad actors is not required and no access control is needed</p>
             </div>

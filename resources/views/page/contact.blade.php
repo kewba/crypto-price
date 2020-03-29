@@ -2,7 +2,8 @@
 @section('title')
 Contact Us
 @endsection
-
+@section('og-title')Contact Us @stop
+@section('meta-description')Get in touch today Crypto Markrt Today will be prompt in responding. @stop
 
 @section('intro')
 <!--==========================

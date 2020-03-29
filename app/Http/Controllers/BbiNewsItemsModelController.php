@@ -35,11 +35,44 @@ class BbiNewsItemsModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public static function remChars($str){
+        $newStr = str_replace('â€“','',$str);
+        $newStr = str_replace('â€”','',$newStr);
+        $newStr = str_replace('â€˜','',$newStr);
+        $newStr = str_replace('â€™','',$newStr);
+        $newStr = str_replace('â€œ','',$newStr);
+        $newStr = str_replace('â€','',$newStr);
+        $newStr = str_replace('.','',$newStr);
+        $newStr = str_replace(',','',$newStr);
+        $newStr = str_replace(':','',$newStr);
+        $newStr = str_replace('?','',$newStr);
+        $newStr = str_replace('\\','',$newStr);
+        $newStr = str_replace('/','-',$newStr);
+        $newStr = str_replace('â‚¬','',$newStr);
+        $newStr = str_replace('â','',$newStr);
+        $newStr = str_replace(';','',$newStr);
+        $newStr = str_replace('!','',$newStr);
+        $newStr = str_replace('€¦','',$newStr);
+        $newStr = str_replace('[','',$newStr);
+        $newStr = str_replace(']','',$newStr);
+        $newStr = str_replace('Â 3','',$newStr);
+        $newStr = str_replace('Â®','',$newStr);
+        $newStr = str_replace('|','',$newStr);
+        return $newStr;
+       }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *

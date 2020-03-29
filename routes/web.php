@@ -19,8 +19,9 @@ use Carbon\Carbon;
 Route::get('/','PageController@index')->name('index');
 Route::get('/about','PageController@about')->name('about');
 Route::get('/news','PageController@news')->name('news');
+Route::get('/news/{seo_url}/','PageController@newsSingle')->name('news_single');
 Route::get('/crypto','PageController@crypto')->name('crypto');
-Route::get('/contact','PageController@contact')->name('contact');
+//Route::get('/contact','PageController@contact')->name('contact');
 
 Auth::routes();
 

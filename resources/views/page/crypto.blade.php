@@ -3,6 +3,8 @@
 @section('title')
 Cryptocurrency
 @endsection
+@section('og-title')Cryptocurrency @stop
+@section('meta-description')The last 12 hour price watch for the cryptos CMT track.@stop
 @section('intro')
 <!--==========================
     Intro Section
@@ -42,7 +44,7 @@ Cryptocurrency
                   
                       <div class="col-md-12 py-1">
                         <div class="section-header pt-3">
-                            <h3 ><i class="fa fa-btc"></i> Bitcoin USD Price</h3>
+                            <h3 ><i class="fa fa-btc"></i> Bitcoin Price</h3>
                             <h3 >{{$crypts['BTC']}}</h3>
                           </div>
                           <div class="card">
@@ -88,7 +90,7 @@ Cryptocurrency
                   
                   <div class="col-md-12 py-1">
                     <div class="section-header pt-3">
-                        <h3 ><i class="cf cf-eth"></i> Ethereum USD Price</h3>
+                        <h3 ><i class="cf cf-eth"></i> Ethereum Price</h3>
                         <h3 >{{$crypts['ETH']}}</h3>
                       </div>
                       <div class="card">
@@ -133,7 +135,7 @@ Cryptocurrency
                   
                   <div class="col-md-12 py-1">
                     <div class="section-header pt-3">
-                        <h3 ><i class="cf cf-ltc"></i> Litecoin USD Price</h3>
+                        <h3 ><i class="cf cf-ltc"></i> Litecoin Price</h3>
                         <h3 >{{$crypts['LTC']}}</h3>
                       </div>
                       <div class="card">
@@ -178,7 +180,7 @@ Cryptocurrency
                   
                   <div class="col-md-12 py-1">
                     <div class="section-header pt-3">
-                        <h3 ><i class="cf cf-dash"></i> Dash USD Price</h3>
+                        <h3 ><i class="cf cf-dash"></i> Dash Price</h3>
                         <h3 >{{$crypts['DASH']}}</h3>
                       </div>
                       <div class="card">
@@ -222,23 +224,7 @@ Cryptocurrency
     </div>
 
 
-    <div class="row my-2">
-        <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chLine"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chBar"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+  
 </div>
 
    

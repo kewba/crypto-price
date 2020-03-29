@@ -2,6 +2,8 @@
 @section('title')
 Home
 @endsection
+@section('og-title')Home @stop
+@section('meta-description')We provide CryptoCurrency Market Data for better decisions.  @stop 
 @section('intro')
 <!--==========================
     Intro Section
@@ -154,13 +156,13 @@ Home
           <div class="col-md-4 col-sm-4 pt-1 pb-1">
                 <div class="blog-post ">
                     <img class="img-fluid center-block" src="<?= $item['img_url'];?>" alt="<?= $item['title']; ?>">
-                    <div class="blog-content">
-                        <h5>
-                            <a href="blog__single__right_sidebar.html">
+                    <div class="blog-content pb-3">
+                        <h5 class="text-center pt-2">
+                            <a href="/news">
                             <?= $item['title']; ?>
                             </a>
                         </h5>
-                        <div class="post-meta ">
+                        <div class="post-meta pb-2">
                             <span class="blog-catagory">Published</span>
                             <span><?= $item['date']; ?></span>
                         </div>
