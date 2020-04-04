@@ -25,4 +25,13 @@ Route::get('/crypto','PageController@crypto')->name('crypto');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('home');
+Route::get('/admin/newschannels', 'BbcNewsModelController@index')->name('bnc.index');
+Route::post('/admin/newschannels', 'BbcNewsModelController@store')->name('bnc.store');
+Route::get('/admin/newschannels/create', 'BbcNewsModelController@create')->name('bnc.create');
+Route::get('/admin/newschannels/{bbc_id}/delchk', 'BbcNewsModelController@delchk')->name('bnc.delchk');
+Route::get('/admin/newschannels/{bbc_id}/edit', 'BbcNewsModelController@edit')->name('bnc.edit');
+Route::put('/admin/newschannels/{bbc_id}/edit', 'BbcNewsModelController@update')->name('bnc.update');
+Route::delete('/admin/newschannels/{bbc_id}/del', 'BbcNewsModelController@destroy')->name('bnc.destroy');
+Route::get('/admin/newschannels/{bbc_id}/imgedit', 'BbcNewsModelController@imgEdit')->name('bnc.imgedit');
+Route::put('/admin/newschannels/{bbc_id}/imgupdate', 'BbcNewsModelController@imgUpdate')->name('bnc.imgupdate');
