@@ -7,12 +7,12 @@
                         </div>
                     @endif
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">News Channel List</h1>
+        <h1 class="h2">News Item List - {{$nl[0]['bbc_name']}}</h1>
        
 </div>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
- <a href="{{ route('home') }}" class="btn btn-outline-primary"> Back</a>
-        <a href="{{ route('bnc.create') }}" class="btn btn-outline-primary">Add News Channel</a>
+ <a href="{{ route('bnc.index') }}" class="btn btn-outline-primary">Back</a>
+        
 </div>
       
 
@@ -22,31 +22,29 @@
           <thead>
             <tr>
               <th>id</th>
-              <th>Channel</th>
-              <th>News Items</th>
+              <th>Title</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-          <?php foreach($cl as $item) :?> 
+          <?php foreach($nl as $item) :?> 
               <tr>
-                  <td>{{$item['bbc_id']}}</td>
-                  <td>{{$item['bbc_channel']}}</td>
+                  <td>{{$item['bbi_id']}}</td>
+                  <td>{{$item['bbi_title']}}</td>
                   <td>
-                    <a href="{{route('bni.itemlist',$item['bbc_id'])}}" class="btn btn-outline-primary">
-                       Manaage
-                     </a>
-                  </td>
-                  <td>
-                    <a href="/admin/newschannels/{{$item['bbc_id']}}/edit" class="btn btn-outline-warning">
+                    <a href="{{route('bni.edit',$item['bbi_id'])}}" class="btn btn-outline-warning">
                         Edit
                      </a>
                   </td>
-                  <td><a href="{{ route('bnc.delchk',$item['bbc_id']) }}" class="btn btn-outline-danger">Delete</a></td>
+                  <td><a href="{{ route('bni.delchk',$item['bbi_id']) }}" class="btn btn-outline-danger">Delete</a></td>
               </tr>
             <?php endforeach;?>
           </tbody>
         </table>
       </div>
+      <nav class="row justify-content-center">
+           
+            {{ $nl->onEachSide(1)->links() }}
+        </nav>
 @endsection
